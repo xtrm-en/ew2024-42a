@@ -1,0 +1,21 @@
+[workspace]
+version = "0.1.0"
+resolver = "2"
+
+members = [
+    "dioxus_frontend",
+    "axum_backend",
+    "common",
+]
+
+[workspace.dependencies]
+common = { path = "common" }
+serde = { version = "1.0.214", default-features = false, features = ["derive"] }
+serde_json = "1.0.132"
+strum = { version = "0.26.3", default-features = false, features = ["derive"] }
+utoipa = { version = "4.2.3", default-features = false, features = [
+    "axum_extras",
+    "chrono",
+] }
+reqwest = { version = "0.12.9" }
+derive_more = { version = "1.0.0", features = ["full"] }

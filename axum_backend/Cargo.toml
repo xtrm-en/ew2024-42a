@@ -1,0 +1,24 @@
+[package]
+name = "axum_backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+common = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+utoipa = { workspace = true }
+utoipa-swagger-ui = { version = "7.1.0", features = ["axum"] }
+axum = { version = "0.7.7", features = [
+    "macros",
+    "tracing",
+    "ws",
+    "multipart",
+] }
+axum-extra = { version = "0.9.4", features = ["cookie", "cookie-private"] }
+tokio = { version = "1.41.0", features = ["full"] }
+tower = { version = "0.4.13", features = ["full"] }
+tower-http = { version = "0.5.2", features = ["full"] }
+thiserror = "1.0.68"
+futures = "0.3.31"
+time = "0.3.36"
