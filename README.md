@@ -27,9 +27,15 @@ Vous êtes libre d'utiliser TailwindCss ou du Css vanilla.
 
 Vous devez travailler seul, sans l'aide de camarades.
 
+# Installation
+
+- Installer rust.
+- Installer dioxus.
+- Installer tout ce que vous voulez ou que nous aurions malencontreusement oublié.
+
 # Ressource recommandée
 
-- [Dioxus](https://dioxuslabs.com/)
+- [Dioxus](https://dioxuslabs.com/). There's everything you need here.
 
 # Lancement du backend
 
