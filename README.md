@@ -35,7 +35,7 @@ See [REQUIREMENTS.md](./REQUIREMENTS.md)
     - ![AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA](./.github/case-and-point.png)
 - Dioxus errors are not very helpful sometimes, which I expected from proc-macros, though quite robust most of the time.
 
-I'm still pissed about the last commit that wasn't made on time, but I'll keep my frustration at [this comment](https://github.com/xtrm-en/ew2024-42a/commit/38f372b9909c6deefe1edb75b91bbc31219ffb48#r148961541).
+I'm still pissed about the last commit that wasn't made on time, i thought it was just kerberos messing with me, no it wasnt :sob: 
 
 ## Final thoughts
 
