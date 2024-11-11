@@ -7,7 +7,7 @@ use dioxus::prelude::*;
 #[component]
 fn BlogPost(id: usize) -> Element {
     return rsx! {
-        p { "hi im post {id}" }
+        p { "TODO: {id}" }
     }
 }
 

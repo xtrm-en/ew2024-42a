@@ -37,7 +37,7 @@ pub(crate) fn AppLayout() -> Element {
                         }
                     } else {
                         Link {
-                            to: Route::Home { },
+                            to: Route::Home { }, //TODO: figure out how to apply a fragment, dioxus seems to strip it out?
                             button {
                                 "Contact"
                             }
