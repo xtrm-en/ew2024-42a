@@ -1,21 +1,19 @@
 #![allow(non_snake_case)]
 
+mod routes;
+pub(crate) mod pages;
+
+use crate::routes::Route;
 use dioxus::prelude::*;
 use dioxus_logger::tracing::{Level, info};
-
-#[derive(Clone, Routable, Debug, PartialEq)]
-enum Route {
-    #[route("/")]
-    Home {},
-    #[route("/blog/:id")]
-    Blog { id: i32 },
-}
 
 
 fn main() {
     // Init logger
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
-    info!("starting app");
+    info!("Starting application in ");
+
+    // Start application
     launch(App);
 }
 
