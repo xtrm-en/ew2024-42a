@@ -1,3 +1,6 @@
 /target
 .direnv/
 /result
+
+# workaround for https://github.com/NixOS/nix/issues/10683
+/nixpkgs*
