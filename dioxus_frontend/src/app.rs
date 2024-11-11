@@ -12,30 +12,28 @@ pub(crate) fn AppLayout() -> Element {
             class: "overflow-x-hidden bg-auto bg-center bg-fixed w-full h-full text-white",
             background_image: "url({BACKGROUND_IMAGE})",
 
-            if !is_home {
-                Navbar {
-                    name: "rsty".to_string(),
-                    logo_uri: APP_LOGO,
+            Navbar {
+                name: "rsty".to_string(),
+                logo_uri: APP_LOGO,
 
-                    div {
-                        class: "flex flex-row gap-4 items-center",
-                        Link {
-                            to: Route::Home {},
-                            button {   
-                                "Home"
-                            }
+                div {
+                    class: "flex flex-row gap-4 items-center",
+                    Link {
+                        to: Route::Home {},
+                        button {   
+                            "Home"
                         }
-                        Link {
-                            to: Route::Home { }, //TODO: figure out how to apply a fragment, dioxus seems to strip it out?
-                            button {
-                                "Contact"
-                            }
+                    }
+                    Link {
+                        to: Route::Home { }, //TODO: figure out how to apply a fragment, dioxus seems to strip it out?
+                        button {
+                            "Contact"
                         }
-                        Link {
-                            to: Route::Blog {},
-                            button {
-                                "News"
-                            }
+                    }
+                    Link {
+                        to: Route::Blog {},
+                        button {
+                            "News"
                         }
                     }
                 }
