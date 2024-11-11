@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    transition: all;
+    transition-duration: 250ms;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+h2 {
+    font-size: x-large;
+}
+
+h3 {
+    font-size: larger;
+}
+
+h4 {
+    font-size: large;
+}
+
+h5 {
+    font-size: medium;
+}
+
+button {
+    border-radius: 10px;
+    background-color: #262629;
+    margin: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #101014;
+}

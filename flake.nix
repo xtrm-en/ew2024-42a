@@ -1,9 +1,10 @@
 {
-  description = "Entretien Web 2024 - 42Angouleme";
+  description = "Entretien Web 2024 - 42Angouleme (rsty)";
 
+  # Declare the input flakes
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-dioxus-cli.url = "github:nixos/nixpkgs?ref=e0464e47880a69896f0fb1810f00e0de469f770a";
+    nixpkgs.url = "github:xtrm-en/nixpkgs?ref=nixos-unstable";
+    nixpkgs-dioxus-cli.url = "github:xtrm-en/nixpkgs?ref=e0464e47880a69896f0fb1810f00e0de469f770a";
     systems.url = "github:nix-systems/x86_64-linux";
 
     rust-overlay = {
@@ -12,6 +13,7 @@
     };
   };
 
+  # Declare the outputs function
   outputs =
     {
       self,
@@ -22,6 +24,9 @@
     }@inputs:
 
     let
+      name = "rsty";
+
+      # Helper function
       forEachSystem =
         f:
         (nixpkgs.lib.genAttrs (import systems) (
@@ -37,35 +42,47 @@
     {
       formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
-      packages = forEachSystem (pkgs: {
-        default = pkgs.rustPlatform.buildRustPackage {
-          pname = "entretien-web-2024-42a";
-          version = "0.1.0";
+      packages = forEachSystem (pkgs: (
+        let
+          # Application build
+          backend = pkgs.rustPlatform.buildRustPackage {
+            pname = name;
+            version = "0.2.0";
 
-          src = ./.;
+            src = ./axum_backend;
 
-          cargoLock = {
-            lockFile = ./Cargo.lock;
+            cargoLock = {
+              lockFile = ./Cargo.lock;
+            };
+
+            nativeBuildInputs = with pkgs; [
+              pkg-config
+              openssl
+              curl
+            ];
+
+            buildInputs = with pkgs; [
+              openssl
+              curl
+            ];
           };
 
-          nativeBuildInputs = with pkgs; [
-            pkg-config
-            openssl
-            curl
-          ];
+          # Docker image package build
+          # dockerImage = pkgs.dockerTools.buildImage {
+          #   inherit name;
+          #   tag = "latest";
+          #   copyToRoot = [ bin ];
+          #   config = {
+          #     Cmd = [ "${bin}/bin/rsty" ];
+          #   };
+          # };
+        in
+        {
+          inherit backend; #dockerImage;
+          default = backend;
+        }));
 
-          buildInputs = with pkgs; [
-            openssl
-            curl
-          ];
-
-          meta = {
-            homepage = "https://github.com/xtrm-en/ew2024-42a";
-            description = "Entretien Web 2024 - 42Angouleme";
-          };
-        };
-      });
-
+      # Declare the development shell
       devShell = forEachSystem (
         pkgs:
         pkgs.mkShell (
@@ -75,8 +92,10 @@
           in
           {
             nativeBuildInputs = with pkgs; [
+              pkg-config
+              rustToolchain
               cargo-watch
-              # Depend on the cli instead of using npx
+              # Depend on the cli instead of using npx, saves us space and dealing with javascript
               tailwindcss
             ] ++ [
               # Pin dioxus-cli to v0.5.6
@@ -84,10 +103,7 @@
             ];
 
             buildInputs = with pkgs; [
-              rustToolchain
-              pkg-config
               openssl
-              curl
             ];
           }
         )

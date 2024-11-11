@@ -4,6 +4,8 @@ The frontend part.
 
 ## Development
 
+You are expected to be running in a Nix development shell.
+
 To start the Tailwind compiler in watch mode, run:
 
 ```bash

@@ -1,7 +1,7 @@
 [application]
 
 # App (Project) Name
-name = "Rusty"
+name = "Rsty"
 
 # Dioxus App Default Platform
 # web, desktop, fullstack
@@ -16,7 +16,7 @@ asset_dir = "assets"
 [web.app]
 
 # HTML title tag content
-title = "Rusty"
+title = "Rsty"
 
 [web.watcher]
 
@@ -26,11 +26,13 @@ reload_html = true
 # which files or dirs will be watcher monitoring
 watch_path = ["src", "assets"]
 
+index_on_404 = true
+
 # include `assets` in web platform
 [web.resource]
 
 # CSS style file
-style = ["/tailwind.css"]
+style = ["tailwind.css"]
 
 # Javascript code file
 script = []

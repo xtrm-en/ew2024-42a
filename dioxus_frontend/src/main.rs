@@ -1,53 +1,33 @@
 #![allow(non_snake_case)]
 
-mod routes;
+mod api;
+mod app;
+mod assets;
+mod components;
 pub(crate) mod pages;
+mod routes;
 
-use crate::routes::Route;
-use dioxus::prelude::*;
-use dioxus_logger::tracing::{Level, info};
+use dioxus_logger::tracing::{trace, Level};
 
-
-fn main() {
-    // Init logger
+fn init_log() {
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
-    info!("Starting application in ");
-
-    // Start application
-    launch(App);
+    trace!("Initializing {} v{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
 }
 
+#[cfg(target_family = "wasm")]
+fn main() {
+    std::panic::set_hook(Box::new(console_error_panic_hook::hook));
 
-fn App() -> Element {
-    rsx! {
-        Router::<Route> {}
-    }
+    init_log();
+
+    dioxus::launch(app::App);
 }
 
-#[component]
-fn Blog(id: i32) -> Element {
-    rsx! {
-        Link { to: Route::Home {}, "Go to counter" }
-        "Blog post {id}"
-    }
+#[cfg(any(windows, unix))]
+fn main() {
+    better_panic::install();
+
+    init_log();
+    
+    dioxus_logger::tracing::error!("Running desktop mode is not supported yet!");
 }
-
-#[component]
-fn Home() -> Element {
-    let mut count = use_signal(|| 0);
-
-    rsx! {
-        Link {
-            to: Route::Blog {
-                id: count()
-            },
-            "Go to blog"
-        }
-        div {
-            h1 { "High-Five counter: {count}" }
-            button { onclick: move |_| count += 1, "Up high!" }
-            button { onclick: move |_| count -= 1, "Down low!" }
-        }
-    }
-}
-
